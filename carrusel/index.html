@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Las Nieves de Cocardo</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="contenedor-principal">
+    <aside class="barra-lateral" aria-label="Personajes">
+      <h2>Equipo</h2>
+      <ul>
+        <li class="item-foto">
+          <a href="#ficha-cocardo" aria-label="Ver ficha de Cocardo">
+            <img src="images/cocardo.jpg" alt="Cocardo">
+          </a>
+          <div class="popup-info">
+            <h3>Cocardo</h3>
+            <p>El villano del arco "Las nieves de Cocardo".</p>
+          </div>
+        </li>
+        <li class="item-foto">
+          <a href="#ficha-lima" aria-label="Ver ficha de Lima">
+            <img src="images/lima.jpg" alt="Lima">
+          </a>
+          <div class="popup-info">
+            <h3>Lima</h3>
+            <p>Novia de Cocardo.</p>
+          </div>
+        </li>
+        <li class="item-foto">
+          <a href="#ficha-fresita" aria-label="Ver ficha de Fresita">
+            <img src="images/fresita.jpg" alt="Fresita">
+          </a>
+          <div class="popup-info">
+            <h3>Fresita</h3>
+            <p>El nuevo sabor de las nieves de Cocardo.</p>
+          </div>
+        </li>
+        <li class="item-foto">
+          <a href="#ficha-banana" aria-label="Ver ficha de Banana">
+            <img src="images/banana.png" alt="Banana">
+          </a>
+          <div class="popup-info">
+            <h3>Banana</h3>
+            <p>El investigador de los crímenes de Cocardo.</p>
+          </div>
+        </li>
+        <li class="item-foto">
+          <a href="#ficha-cocarda" aria-label="Ver ficha de Cocarda">
+            <img src="images/Cocarda.png" alt="Cocarda">
+          </a>
+          <div class="popup-info">
+            <h3>Cocarda</h3>
+            <p>Hermana de Cocardo.</p>
+          </div>
+        </li>
+      </ul>
+    </aside>
+
+    <main class="contenido">
+      <header class="encabezado">
+        <h1>Las Nieves de Cocardo</h1>
+        <p>Selecciona un personaje para ver su ficha. Desliza el carrusel o usa sus botones para explorar las imágenes.</p>
+        <form class="busqueda" role="search">
+          <label for="buscar-personaje">Buscar un personaje</label>
+          <input id="buscar-personaje" type="search" placeholder="Ejemplo: Lima, banana..." autocomplete="off">
+          <p id="estado-busqueda" class="estado-busqueda" role="status" aria-live="polite"></p>
+        </form>
+      </header>
+
+      <section class="contenedor-fichas" aria-label="Fichas de personajes">
+        <article id="ficha-cocardo" class="ficha-personaje">
+          <img src="images/cocardo.jpg" alt="Cocardo">
+          <h2>Cocardo</h2>
+          <p>El villano del arco "Las nieves de Cocardo".</p>
+        </article>
+        <article id="ficha-lima" class="ficha-personaje">
+          <img src="images/lima.jpg" alt="Lima">
+          <h2>Lima</h2>
+          <p>Novia de Cocardo.</p>
+        </article>
+        <article id="ficha-fresita" class="ficha-personaje">
+          <img src="images/fresita.jpg" alt="Fresita">
+          <h2>Fresita</h2>
+          <p>El nuevo sabor de las nieves de Cocardo.</p>
+        </article>
+        <article id="ficha-banana" class="ficha-personaje">
+          <img src="images/banana.png" alt="Banana">
+          <h2>Banana</h2>
+          <p>El investigador de los crímenes de Cocardo.</p>
+        </article>
+        <article id="ficha-cocarda" class="ficha-personaje">
+          <img src="images/Cocarda.png" alt="Cocarda">
+          <h2>Cocarda</h2>
+          <p>Hermana de Cocardo.</p>
+        </article>
+        <p class="mensaje-inicial">Haz clic en un personaje de la barra lateral para ver su ficha completa.</p>
+      </section>
+
+      <section class="carrusel-wrapper" aria-label="Galería de personajes">
+        <input class="selector-slide" type="radio" name="slide" id="slide-1" checked>
+        <input class="selector-slide" type="radio" name="slide" id="slide-2">
+        <input class="selector-slide" type="radio" name="slide" id="slide-3">
+        <input class="selector-slide" type="radio" name="slide" id="slide-4">
+        <input class="selector-slide" type="radio" name="slide" id="slide-5">
+        <div class="carrusel">
+          <img src="images/cocardo.jpg" alt="Cocardo">
+          <img src="images/lima.jpg" alt="Lima">
+          <img src="images/fresita.jpg" alt="Fresita">
+          <img src="images/banana.png" alt="Banana">
+          <img src="images/Cocarda.png" alt="Cocarda">
+        </div>
+        <nav class="controles-carrusel" aria-label="Seleccionar imagen">
+          <label for="slide-1">1</label>
+          <label for="slide-2">2</label>
+          <label for="slide-3">3</label>
+          <label for="slide-4">4</label>
+          <label for="slide-5">5</label>
+        </nav>
+      </section>
+    </main>
+  </div>
+  <footer class="pie-pagina">
+    <p>Diseñado y creado por Luis Enrique Villalba Rodríguez.</p>
+  </footer>
+  <script>
+    const formularioBusqueda = document.querySelector(".busqueda");
+    const campoBusqueda = document.querySelector("#buscar-personaje");
+    const estadoBusqueda = document.querySelector("#estado-busqueda");
+    const personajes = Array.from(document.querySelectorAll(".item-foto"));
+
+    function normalizarTexto(texto) {
+      return texto
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLocaleLowerCase("es");
+    }
+
+    formularioBusqueda.addEventListener("submit", (evento) => {
+      evento.preventDefault();
+    });
+
+    campoBusqueda.addEventListener("input", () => {
+      const consulta = normalizarTexto(campoBusqueda.value.trim());
+      const palabras = consulta.split(/\s+/).filter(Boolean);
+      let coincidencias = 0;
+
+      personajes.forEach((personaje) => {
+        const textoPersonaje = normalizarTexto(personaje.textContent);
+        const coincide = palabras.every((palabra) => textoPersonaje.includes(palabra));
+        personaje.hidden = !coincide;
+        if (coincide) coincidencias++;
+      });
+
+      estadoBusqueda.textContent = coincidencias === 0
+        ? "No se encontraron personajes."
+        : `Personajes encontrados: ${coincidencias}`;
+    });
+  </script>
+</body>
+</html>
